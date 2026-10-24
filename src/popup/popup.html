@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Dynamic Chatbot</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <h1>AI Dynamic Chatbot</h1>
+    <label>Mode
+      <select id="mode">
+        <option value="off">Off</option>
+        <option value="copilot">Co-pilot (drafts, you approve)</option>
+        <option value="autopilot">Auto-pilot (sends by itself)</option>
+      </select>
+    </label>
+  </header>
+
+  <nav>
+    <button data-tab="business" class="active">Business</button>
+    <button data-tab="ai">AI keys</button>
+    <button data-tab="behavior">Behavior</button>
+    <button data-tab="tools">Page tools</button>
+  </nav>
+
+  <section id="tab-business" class="tab active">
+    <p class="hint">This is the only source of facts the bot may use. If something isn't here, it hands the chat to you instead of guessing.</p>
+    <label>Business name <input id="b-name" /></label>
+    <label>Category <input id="b-category" placeholder="e.g. Clothing store, Game dev studio" /></label>
+    <label>Reply language <input id="b-language" placeholder="English, Bangla, Banglish, bilingual…" /></label>
+    <label>About <textarea id="b-about" rows="3"></textarea></label>
+    <label>Products / services and prices <textarea id="b-services" rows="6" placeholder="Basic T-shirt - 450 BDT&#10;Hoodie - 1200 BDT"></textarea></label>
+    <label>FAQs <textarea id="b-faqs" rows="5" placeholder="Q: Do you deliver outside Dhaka?&#10;A: Yes, 120 BDT, 3-5 days."></textarea></label>
+    <label>Rules (delivery, minimum order, returns, discounts) <textarea id="b-rules" rows="4"></textarea></label>
+    <label>Your own past replies (style samples, one per line, max 10) <textarea id="b-styles" rows="5"></textarea></label>
+    <details><summary>Scanned posts (<span id="posts-count">0</span>)</summary><pre id="b-posts"></pre></details>
+  </section>
+
+  <section id="tab-ai" class="tab">
+    <p class="hint">Keys stay on this device (chrome.storage.local) and are only sent to the provider you choose. Providers are tried in the order below; unconfigured ones are skipped.</p>
+    <label>Provider order (comma separated) <input id="p-order" /></label>
+    <fieldset><legend>Google Gemini (AI Studio)</legend>
+      <label>API key <input id="gemini-key" type="password" autocomplete="off" /></label>
+      <label>Model <input id="gemini-model" /></label>
+      <button data-test="gemini">Test</button> <span class="result" id="res-gemini"></span>
+    </fieldset>
+    <fieldset><legend>Groq</legend>
+      <label>API key <input id="groq-key" type="password" autocomplete="off" /></label>
+      <label>Model <input id="groq-model" /></label>
+      <button data-test="groq">Test</button> <span class="result" id="res-groq"></span>
+    </fieldset>
+    <fieldset><legend>OpenRouter (DeepSeek and others)</legend>
+      <label>API key <input id="openrouter-key" type="password" autocomplete="off" /></label>
+      <label>Model <input id="openrouter-model" /></label>
+      <button data-test="openrouter">Test</button> <span class="result" id="res-openrouter"></span>
+    </fieldset>
+    <fieldset><legend>Ollama (local, free)</legend>
+      <label>URL <input id="ollama-url" /></label>
+      <label>Model <input id="ollama-model" /></label>
+      <button data-test="ollama">Test</button> <span class="result" id="res-ollama"></span>
+    </fieldset>
+  </section>
+
+  <section id="tab-behavior" class="tab">
+    <fieldset><legend>Safety guardrails</legend>
+      <label>Minimum confidence to reply (0-1) <input id="g-conf" type="number" step="0.05" min="0" max="1" /></label>
+      <label class="check"><input id="g-nums" type="checkbox" /> Escalate if a reply contains a price or number that is not in my knowledge base</label>
+      <label>Max bot replies per chat per hour <input id="g-rate" type="number" min="1" /></label>
+    </fieldset>
+    <fieldset><legend>Auto-pilot pacing</legend>
+      <label>Reading delay, min seconds <input id="pc-rmin" type="number" min="0" /></label>
+      <label>Reading delay, max seconds <input id="pc-rmax" type="number" min="0" /></label>
+      <label>Typing speed, min WPM <input id="pc-wmin" type="number" min="10" /></label>
+      <label>Typing speed, max WPM <input id="pc-wmax" type="number" min="10" /></label>
+    </fieldset>
+    <fieldset><legend>Style and holding messages</legend>
+      <label class="check"><input id="s-lower" type="checkbox" /> Casual all-lowercase replies</label>
+      <label class="check"><input id="h-send" type="checkbox" /> Auto-pilot: send a holding message when it hands a chat to me</label>
+      <label>Holding messages (one per line) <textarea id="h-msgs" rows="3"></textarea></label>
+      <label>Disclosure note added to the first reply in a chat (optional)
+        <input id="d-note" placeholder="e.g. (this reply was drafted with AI help)" /></label>
+    </fieldset>
+    <p class="hint">If a customer asks whether they are talking to a bot, the bot never answers that itself: it pauses the chat and alerts you.</p>
+  </section>
+
+  <section id="tab-tools" class="tab">
+    <p class="hint">Open your Facebook Page or Meta Business Suite inbox in the active tab first.</p>
+    <button id="scan">Scan this Page (bio + recent posts)</button> <span class="result" id="res-scan"></span><br />
+    <button id="learn">Learn my style from the open chat</button> <span class="result" id="res-learn"></span><br />
+    <button id="diag">Copy DOM diagnostics</button> <span class="result" id="res-diag"></span>
+    <p class="hint">Diagnostics shows whether the adapter can find the message box and read the chat. Paste it into a GitHub issue if Meta changed its layout.</p>
+  </section>
+
+  <footer>
+    <button id="save" class="primary">Save</button>
+    <span class="result" id="res-save"></span>
+  </footer>
+  <script src="../shared/decision.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

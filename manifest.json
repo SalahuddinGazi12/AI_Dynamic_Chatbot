@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "AI Dynamic Chatbot",
+  "version": "0.1.0",
+  "description": "Co-pilot / auto-pilot inbox replies for your Facebook Page (Meta Business Suite). Bring your own AI key: Gemini, Groq, OpenRouter (DeepSeek) or local Ollama.",
+  "minimum_chrome_version": "110",
+  "permissions": [
+    "storage",
+    "notifications",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://business.facebook.com/*",
+    "https://www.facebook.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://api.groq.com/*",
+    "https://openrouter.ai/*",
+    "http://localhost:11434/*",
+    "http://127.0.0.1:11434/*"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://business.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "src/shared/decision.js",
+        "src/content/adapters/facebook-page.js",
+        "src/content/page-scanner.js",
+        "src/content/human-typer.js",
+        "src/content/overlay-ui.js",
+        "src/content/main.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "AI Dynamic Chatbot",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/popup/popup.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

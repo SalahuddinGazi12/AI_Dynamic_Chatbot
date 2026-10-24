@@ -1,0 +1,14 @@
+{
+  "name": "Example Fashion House",
+  "category": "Clothing store",
+  "language": "Banglish",
+  "about": "Small online clothing brand in Dhaka. Cash on delivery available.",
+  "services": "Basic T-shirt - 450 BDT\nHoodie - 1200 BDT\nCap - 300 BDT",
+  "faqs": "Q: Do you deliver outside Dhaka?\nA: Yes, delivery outside Dhaka is 120 BDT and takes 3-5 days.\nQ: Can I return an item?\nA: Size exchange within 3 days if unworn.",
+  "rules": "Delivery inside Dhaka is 60 BDT, 1-2 days.\nNo discounts unless the owner approves.",
+  "ownerStyleSamples": [
+    "hey! yes available, which size u need?",
+    "delivery inside dhaka 60 taka, 1-2 din lagbe"
+  ],
+  "style": { "lowercase": true }
+}

@@ -1,0 +1,5 @@
+node_modules/
+business-config.json
+*.zip
+.DS_Store
+.env

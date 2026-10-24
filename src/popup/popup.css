@@ -1,0 +1,22 @@
+* { box-sizing: border-box; }
+body { margin: 0; width: 420px; max-width: 100%; font: 13px/1.45 system-ui, sans-serif; color: #1c1e21; background: #fff; }
+header { padding: 12px 14px; background: #f0f2f5; border-bottom: 1px solid #dde0e4; }
+h1 { margin: 0 0 8px; font-size: 16px; }
+nav { display: flex; border-bottom: 1px solid #dde0e4; }
+nav button { flex: 1; padding: 8px 4px; border: 0; background: none; cursor: pointer; border-bottom: 2px solid transparent; }
+nav button.active { border-bottom-color: #1877f2; color: #1877f2; font-weight: 600; }
+.tab { display: none; padding: 12px 14px; max-height: 480px; overflow: auto; }
+.tab.active { display: block; }
+label { display: block; margin-bottom: 8px; font-weight: 500; }
+label.check { font-weight: 400; }
+input, textarea, select { width: 100%; margin-top: 3px; padding: 6px 8px; border: 1px solid #ccd0d5; border-radius: 6px; font: inherit; }
+input[type="checkbox"] { width: auto; margin-right: 6px; }
+fieldset { border: 1px solid #dde0e4; border-radius: 8px; margin: 0 0 10px; padding: 8px 10px; }
+legend { padding: 0 4px; font-weight: 600; }
+button { font: inherit; padding: 6px 12px; border: 0; border-radius: 6px; background: #e4e6eb; cursor: pointer; margin: 2px 0; }
+button.primary { background: #1877f2; color: #fff; }
+.hint { color: #65676b; margin: 0 0 10px; }
+.result { margin-left: 8px; color: #65676b; }
+.result.ok { color: #1a7f37; } .result.err { color: #c0152f; }
+footer { padding: 10px 14px; border-top: 1px solid #dde0e4; background: #f7f8fa; }
+pre { white-space: pre-wrap; max-height: 160px; overflow: auto; background: #f7f8fa; padding: 6px; border-radius: 6px; }

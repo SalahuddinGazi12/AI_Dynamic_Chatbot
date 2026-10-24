@@ -1,0 +1,10 @@
+{
+  "name": "ai-dynamic-chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Co-pilot / auto-pilot Facebook Page inbox replies with bring-your-own-key AI.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/decision.test.mjs"
+  }
+}
